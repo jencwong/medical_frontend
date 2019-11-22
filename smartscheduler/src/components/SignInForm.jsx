@@ -20,22 +20,18 @@ class SignInForm extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    event.preventDefault()
-        const baseURL = this.props.baseURL
-        const response = await axios.post(`${baseURL}/holidays`, {name: this.state.name})
-        this.setState({
-            name: ''
-        })
+    // event.preventDefault()
+    //     const baseURL = this.props.baseURL
+    //     const response = await axios.post(`${baseURL}/holidays`, {name: this.state.name})
+    //     this.setState({
+    //         name: ''
+    //     })
+    console.log(this.state);
   }
   render() {
     return (
       <div className="FormCenter">
-        <form
-          onSubmit={this.handleSubmit}
-          className="FormFields"
-          onSubmit={this.handleSubmit}
-          className="FormFields"
-        >
+        <form onSubmit={this.handleSubmit} className="FormFields">
           <div className="FormField">
             <label className="FormField__Label" htmlFor="email">
               E-Mail Address
@@ -67,7 +63,11 @@ class SignInForm extends Component {
 
           <div className="FormField">
             <button className="FormField__Button mr-20">Sign In</button>
-            <Link to="/" className="FormField__Link">
+            <Link
+              to="/sign-up"
+              className="FormField__Link"
+              style={{ color: "white", padding: "5px" }}
+            >
               Create an account
             </Link>
           </div>

@@ -99,7 +99,11 @@ class SignUpForm extends Component {
             >
               Sign Up
             </button>
-            <Link to="/sign-in" classname="FormField__Link">
+            <Link
+              to="/sign-in"
+              classname="FormField__Link"
+              style={{ color: "white", padding: "5px" }}
+            >
               I'm already a member
             </Link>
           </div>

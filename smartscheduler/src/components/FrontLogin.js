@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css";
+import "../App.css";
 import Particles from "react-particles-js";
 import {
   BrowserRouter as Router,
@@ -9,7 +9,6 @@ import {
 } from "react-router-dom";
 import SignUpForm from "./SignUpForm";
 import SignInForm from "./SignInForm";
-import PaperSheet from "./ChatBox";
 
 const particleOpt = {
   particles: {
@@ -42,7 +41,7 @@ function FrontLogin() {
             </NavLink>
             <NavLink
               exact
-              to="/"
+              to="/sign-up"
               className="PageSwitcher__Item"
               activeClassName="PageSwitcher__Item--Active"
             >
@@ -60,16 +59,15 @@ function FrontLogin() {
             or
             <NavLink
               exact
-              to="/"
+              to="/sign-up"
               className="FormTitle__Link"
               activeClassName="FormTitle__Link--Active "
             >
               Sign Up
             </NavLink>
           </div>
-          <Route exact path="/" component={SignUpForm}></Route>
+          <Route exact path="/sign-up" component={SignUpForm}></Route>
           <Route path="/sign-in" component={SignInForm}></Route>
-          <Route path="/paper" component={PaperSheet}></Route>
         </div>
       </div>
     </Router>
