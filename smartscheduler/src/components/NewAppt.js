@@ -6,9 +6,13 @@ class NewAppt extends Component {
     super(props);
     this.state = {
       name: "",
-      dateOfBirth: "",
+      dob: "",
       email: "",
       phone: "",
+      date: "",
+      time: "",
+      vistType: "",
+      doctor: "",
       // visited: ""
     };
     this.handleChange = this.handleChange.bind(this);
@@ -24,18 +28,25 @@ class NewAppt extends Component {
     event.preventDefault();
     console.log("test");
     const baseURL = this.props.baseURL;
-    const response = await axios.post(`${baseURL}/bookmarks`, {
+    const response = await axios.post(`${baseURL}/appointments`, {
       name: this.state.name,
-      url: this.state.url,
-      description: this.state.description
+      dob: this.state.dob,
+      email: this.state.email,
+      phone: this.state.phone,
+      visitType: this.state.visitType,
+      doctor: this.state.doctor,
     });
     this.setState({
-      name: "",
-      url: "",
-      description: "",
-      visited: ""
+      firstName: "",
+      lastName: "",
+      dob: "",
+      email: "",
+      phone: "",
+      visitType: "",
+      comments: "",
+      doctor: "",
     });
-    this.props.getBookmarks();
+    this.props.getAppointments();
   }
 
   render() {
@@ -48,25 +59,57 @@ class NewAppt extends Component {
           name="name"
           onChange={this.handleChange}
           value={this.state.name}
-          placeholder="Add site name"
+          placeholder="Enter Your Name"
         />
-        <label htmlFor="url"></label>
+        <label htmlFor="dob"></label>
         <input
           type="text"
-          id="url"
-          name="url"
+          id="dob"
+          name="dob"
           onChange={this.handleChange}
-          value={this.state.url}
-          placeholder="Add URL"
+          value={this.state.dob}
+          placeholder="Date of Birth"
         />
-        <label htmlFor="description"></label>
+        <label htmlFor="email"></label>
         <input
           type="text"
-          id="description"
-          name="description"
+          id="email"
+          name="email"
           onChange={this.handleChange}
-          value={this.state.description}
-          placeholder="Add Description"
+          value={this.state.email}
+          placeholder="Email"
+        />
+        <label htmlFor="phone"></label>
+        <input
+          type="text"
+          id="phone"
+          name="phone"
+          onChange={this.handleChange}
+          value={this.state.phone}
+          placeholder="Phone Number"
+        />
+        <input
+          type="text"
+          id="visitType"
+          name="visitType"
+          onChange={this.handleChange}
+          value={this.state.visitType}
+          placeholder="Reason for Visit"
+        />
+         <textarea
+          id="comments"
+          name="comments"
+          onChange={this.handleChange}
+          value={this.state.comments}
+          placeholder="Comments / Reason for Visit"
+        />
+        <input
+          type="text"
+          id="doctor"
+          name="visitType"
+          onChange={this.handleChange}
+          value={this.state.visitType}
+          placeholder="Reason for Visit"
         />
         <input type="submit" value="SUBMIT" />
       </form>
@@ -74,4 +117,4 @@ class NewAppt extends Component {
   }
 }
 
-export default NewForm;
+export default NewAppt;
