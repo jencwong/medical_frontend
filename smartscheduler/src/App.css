@@ -1,11 +1,19 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
+body {
+  /* text-align: center; */
 }
-
+h1 {
+  color: blue;
+}
+h2 {
+  color: rgb(64, 64, 241);
+}
+.appointments {
+  /* text-align: center; */
+}
+table {
+/* text-align: center; */
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
