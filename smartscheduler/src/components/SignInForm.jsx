@@ -20,12 +20,6 @@ class SignInForm extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    // event.preventDefault()
-    //     const baseURL = this.props.baseURL
-    //     const response = await axios.post(`${baseURL}/holidays`, {name: this.state.name})
-    //     this.setState({
-    //         name: ''
-    //     })
     console.log(this.state);
   }
   render() {
