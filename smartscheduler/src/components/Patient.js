@@ -1,31 +1,44 @@
+//Notes: 
+//Patient Dashboard needs patient name and details at top. States have fields but other code needs to be written to display them.
+//nav bar on left
+//add box with "No Appointments Scheduled" & Button below that stating "Schedule Appointment"
 import React, { Component } from "react";
-import "./App.css";
+import "../App.css";
 import axios from "axios";
-import NewAppt from "./components/NewAppt.js";
-import ShowAppt from "./components/ShowAppt.js";
-import UpdateAppt from "./components/UpdateAppt.js";
+import NewAppt from "./NewAppt.js";
+import ShowAppt from "./ShowAppt.js";
+import UpdateAppt from "./UpdateAppt.js";
 
-//The following commented out code was moved to MainContent:
-// let baseURL = process.env.REACT_APP_BASEURL;
 
-// if (process.env.NODE_ENV === "development") {
-//   baseURL = "http://localhost:3003";
-// } else {
-//   baseURL = "heroku or other backend url here";
-// }
+let baseURL = process.env.REACT_APP_BASEURL;
+
+if (process.env.NODE_ENV === "development") {
+  baseURL = "http://localhost:3003";
+} else {
+  baseURL = "heroku or other backend url here";
+}
 
 class Patient extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      firstName: "",
+      lastName: "",
+      dob: "",
+      email: "",
+      phone: "",
+      comments: "",
+      visitType: "",
+      time: "",
       appointments: [],
       appointment: {},
       selectedAppointment: {}, 
       editButton: false
+
     };
     this.getAppointments = this.getAppointments.bind(this);
     this.deleteAppointments = this.deleteAppointments.bind(this);
-    // this.toggleVisited = this.toggleVisited.bind(this);
+    this.toggleVisited = this.toggleVisited.bind(this);
     this.editAppointments = this.editAppointments.bind(this);
   }
 
@@ -34,7 +47,7 @@ class Patient extends Component {
   }
 
   async getAppointments() {
-    const response = await axios(`${baseURL}/appointments`);
+    const response = await axios(`${baseURL}/appointment`);
     const appointments = response.data;
 
     this.setState({ appointments: appointments });
@@ -51,7 +64,7 @@ class Patient extends Component {
 
 
   async deleteAppointments(id) {
-    await axios.delete(`${baseURL}/appointments/${id}`);
+    await axios.delete(`${baseURL}/appointment/${id}`);
     const filteredAppointments = this.state.appointments.filter(appointment => {
       return appointment._id !== id;
     });
@@ -86,22 +99,31 @@ class Patient extends Component {
 
   render() {
     const showUpdateAppt= this.state.editButton ? <UpdateAppt appointment={ this.state.selectedAppointment } getAppointments={ this.state.getAppointments } /> : null;
+    
     return (
       <div className="container">
+        <h1>Welcome Molly Weasley</h1>
+
         <h1>My Appointments</h1>
         <NewAppt getAppointments={this.getAppointments} baseURL={baseURL} />
         <main>
+          <div >
           <section>
-            <table>
+            <table className="appointments">
               <tbody>
                 {this.state.appointments.map(appointment => {
+                  const date = new Date(appointment.date);
+                  const formatDate = date.toDateString()
                   return (
                     <tr onMouseOver={() => this.getAppointment(appointment)}
                       key={ appointment._id }>
                       <td>
-                        <a href={"http://" + appointment.url} target="_blank">
-                          { appointment.name }
+                        <a href={ appointment } target="_blank">
+                          { formatDate }
                         </a>
+                      </td>
+                      <td>
+                        { appointment.time }
                       </td>
                       {/* note: toggle may not be needed as written - TBD */}
                       <td
@@ -117,7 +139,7 @@ class Patient extends Component {
                       <td>
                         {" "}
                         <button onClick={() => this.deleteAppointments(appointment._id)}>
-                          DELETE{" "}
+                          Delete{" "}
                         </button>
                       </td>
                     </tr>
@@ -126,6 +148,7 @@ class Patient extends Component {
               </tbody>
             </table>
           </section>
+          </div>
           <section> { showUpdateAppt } </section>
         </main>
         <br />
