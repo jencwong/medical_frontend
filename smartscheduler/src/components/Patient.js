@@ -8,7 +8,7 @@ import axios from "axios";
 import NewAppt from "./NewAppt.js";
 import ShowAppt from "./ShowAppt.js";
 import UpdateAppt from "./UpdateAppt.js";
-
+import Sidebar from "./Sidebar.js";
 
 let baseURL = process.env.REACT_APP_BASEURL;
 
@@ -99,29 +99,45 @@ class Patient extends Component {
 
   render() {
     const showUpdateAppt= this.state.editButton ? <UpdateAppt appointment={ this.state.selectedAppointment } getAppointments={ this.state.getAppointments } /> : null;
-    
     return (
       <div className="container">
-        <h1>Welcome Molly Weasley</h1>
-
-        <h1>My Appointments</h1>
-        <NewAppt getAppointments={this.getAppointments} baseURL={baseURL} />
-        <main>
-          <div >
-          <section>
-            <table className="appointments">
+        <div className="menu">
+          < Sidebar/>
+        </div>
+        <div className="container-mainContent">
+          {/* <div class="Card">
+            <div class="card-content">
+              <div class="content">
+                You have no appointments currently scheduled.
+              </div>
+            </div>
+          </div> */}
+          <h2>Schedule An Appointment</h2>  
+          <NewAppt getAppointments={this.getAppointments} baseURL={baseURL} />
+          <h2>Current Appointments</h2>
+          <div className="card-content">
+            <table className="table">
+              {/* <thead>Current Appointments</thead> */}
               <tbody>
                 {this.state.appointments.map(appointment => {
                   const date = new Date(appointment.date);
                   const formatDate = date.toDateString()
                   return (
-                    <tr onMouseOver={() => this.getAppointment(appointment)}
+                    // <thead>
+                    //   <tr>
+                    //     <th>Date</th>
+                    //     <th>Time</th>
+                    //   </tr>
+                    // </thead>
+                    <tr className="bordered" onMouseOver={() => this.getAppointment(appointment)}
                       key={ appointment._id }>
+                        
                       <td>
                         <a href={ appointment } target="_blank">
                           { formatDate }
                         </a>
                       </td>
+                      
                       <td>
                         { appointment.time }
                       </td>
@@ -147,14 +163,13 @@ class Patient extends Component {
                 })}
               </tbody>
             </table>
-          </section>
           </div>
-          <section> { showUpdateAppt } </section>
-        </main>
-        <br />
-        <br />
-        <br />
-        {this.state.appointment && <ShowAppt appointment={this.state.appointment} />}
+          <div> { showUpdateAppt } </div>
+          <br />
+          <br />
+          <br />
+          {this.state.appointment && <ShowAppt appointment={this.state.appointment} />}
+        </div>
       </div>
     );
   }
