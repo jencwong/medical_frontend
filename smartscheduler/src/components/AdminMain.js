@@ -6,21 +6,16 @@ import React, { Component } from "react";
 // import FormUpdate from "./FormUpdate.js";
 import axios from "axios";
 import ShowAppt from "./ShowAppt.js";
-
 let baseURL = process.env.REACT_APP_BASEURL;
-
 if (process.env.NODE_ENV === "development") {
   baseURL = "http://localhost:3003";
 } else {
   baseURL = "heroku or other backend url here";
 }
-
 // const baseURL = "http://localhost:3003";
-
 //==============================
 //        COMPONENTS
 //==============================
-
 class AdminMain extends Component {
   constructor(props) {
     super(props);
@@ -37,12 +32,10 @@ class AdminMain extends Component {
     // this.deleteBookmark = this.deleteBookmark.bind(this);
     // this.toggleForm = this.toggleForm.bind(this);
   }
-
   componentDidMount() {
     this.getAppointments();
     this.getPatients();
   }
-
   async getAppointments() {
     const response = await axios(`${baseURL}/appointment`);
     const appointments = response.data;
@@ -50,7 +43,6 @@ class AdminMain extends Component {
       appointments: appointments
     });
   }
-
   // async getPatient(id) {
   //   const response = await axios(`${baseURL}/user/${id}`);
   //   const data = response.data.foundPatient;
@@ -59,7 +51,6 @@ class AdminMain extends Component {
   //   });
   //   console.log(this.state.currentPatient);
   // }
-
   async getPatients() {
     const response = await axios(`${baseURL}/user`);
     const users = response.data;
@@ -67,11 +58,9 @@ class AdminMain extends Component {
       users: users
     });
   }
-
   getAppointment(appointment) {
     this.setState({ appointment: appointment });
   }
-
   // isEmpty(obj) {
   //   return Object.entries(obj).length === 0 && obj.constructor === Object;
   // }
@@ -79,13 +68,11 @@ class AdminMain extends Component {
   //     this.setState({ bookmark: bookmark });
   //     this.toggleForm();
   //   }
-
   //   handleAddBookmark(bookmark) {
   //     this.setState({
   //       bookmarks: [...this.state.bookmarks, bookmark]
   //     });
   //   }
-
   //   async deleteBookmark(id) {
   //     await axios.delete(`${baseURL}/bookmarks/${id}`);
   //     const filteredBookmarks = this.state.bookmarks.filter(bookmark => {
@@ -95,13 +82,11 @@ class AdminMain extends Component {
   //       bookmarks: filteredBookmarks
   //     });
   //   }
-
   //   toggleForm() {
   //     this.setState(state => ({
   //       newform: !state.newform
   //     }));
   //   }
-
   render() {
     return (
       <div className="container is-fluid has-background-grey-lighter">
@@ -117,7 +102,6 @@ class AdminMain extends Component {
               return this.state.users.map(user => {
                 console.log("user", user._id);
                 console.log("appointment", appointment.patientId);
-
                 if (user._id === appointment.patientId) {
                   console.log("it matches");
                   console.log(user.firstName);
@@ -190,5 +174,4 @@ class AdminMain extends Component {
     );
   }
 }
-
 export default AdminMain;
