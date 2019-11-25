@@ -110,16 +110,14 @@ class AdminMain extends Component {
                       onMouseOver={() => this.getAppointment(appointment)}
                       key={appointment._id}
                     >
-                      <ul>
-                        <li className="subtitle is-2">
-                          {user.firstName}&nbsp;
-                          {user.lastName}&nbsp;
-                          {/* {appointment._id} */}
-                          {formatDate}&nbsp;
-                          {appointment.time}
-                          {/* {appointment.patientId} */}
-                        </li>
-                      </ul>
+                      <td className="subtitle is-2">
+                        {user.firstName}&nbsp;
+                        {user.lastName}&nbsp;
+                        {/* {appointment._id} */}
+                        {formatDate}&nbsp;
+                        {appointment.time}
+                        {/* {appointment.patientId} */}
+                      </td>
                       {/* <p>{user.firstName}</p> */}
                       {/* <ul>
                     <li className="subtitle is-2">
@@ -138,7 +136,7 @@ class AdminMain extends Component {
                       </button>
                     </div>
                   </ul> */}
-                    
+                    </tr>
                   );
                 }
               });

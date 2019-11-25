@@ -37,6 +37,7 @@ class Patient extends Component {
       appointments: [],
       appointment: {},
       selectedAppointment: {}, 
+      loggedInUser: {},
       editButton: false
 
     };
@@ -48,7 +49,18 @@ class Patient extends Component {
 
   componentDidMount() {
     this.getAppointments();
-    this.getPatients();
+    // this.getPatients();
+  }
+
+  async testLogin() {
+    const response = await axios.post(`${baseURL}/session`, {
+      username: "",
+      password: "",
+      category: ""
+    });
+    const user = response.data;
+
+    this.setState({ loggedInUser: user });
   }
 
   async getAppointments() {
