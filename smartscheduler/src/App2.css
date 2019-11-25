@@ -8,16 +8,21 @@ h2 {
   margin-bottom: -10px;
   margin-top: 20px;
 }
+h3 {
+  color: rgb(45, 103, 230);
+}
 button {
   color: blue;
   font-size: 10pt;
 }
 table {
- /* text-align: center;  */
  border-collapse: collapse;
  }
  td{
   padding: 0px 10px 5px;
+ }
+ .table-header {
+   font-style: oblique;
  }
  form {
    display: flex;
@@ -100,7 +105,7 @@ iframe {
   /* border: 1px solid rgba(0, 0, 0, 0.1); */
 }
 .menu-label {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 600;
 }
 .container-office-info {

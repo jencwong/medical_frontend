@@ -13,6 +13,7 @@ class NewAppt extends Component {
       date: "",
       time: "",
       visitType: "",
+      comments: "",
       // doctor: "",
       // visited: ""
     };
@@ -33,6 +34,7 @@ class NewAppt extends Component {
       date: this.state.date,
       time: this.state.time,
       visitType: this.state.visitType,
+      comments: this.state.comments,
     });
     this.setState({
       date: "",
@@ -49,7 +51,7 @@ class NewAppt extends Component {
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="date">Date</label>
           <input className="inputData"
-            type="text"
+            type="date"
             id="date"
             name="date"
             onChange={this.handleChange}
@@ -58,7 +60,7 @@ class NewAppt extends Component {
           />
           <label htmlFor="time">Time</label>
           <input className="inputData"
-            type="text"
+            type="time"
             id="time"
             name="time"
             onChange={this.handleChange}
@@ -82,7 +84,11 @@ class NewAppt extends Component {
             value={this.state.comments}
             placeholder="Enter Comments / Additional Information"
           />
-          <input className="submitBtn" type="submit" value="SUBMIT" />
+          <input 
+          className="submitBtn" 
+          type="submit" 
+          value="SUBMIT" 
+          />
         </form>
       </div>
     );
