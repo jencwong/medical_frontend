@@ -106,7 +106,10 @@ class AdminMain extends Component {
                   console.log("it matches");
                   console.log(user.firstName);
                   return (
-                    <div key={appointment._id}>
+                    <tr
+                      onMouseOver={() => this.getAppointment(appointment)}
+                      key={appointment._id}
+                    >
                       <ul>
                         <li className="subtitle is-2">
                           {user.firstName}&nbsp;
@@ -135,7 +138,7 @@ class AdminMain extends Component {
                       </button>
                     </div>
                   </ul> */}
-                    </div>
+                    
                   );
                 }
               });
