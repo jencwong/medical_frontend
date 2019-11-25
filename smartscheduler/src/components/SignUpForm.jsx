@@ -30,7 +30,7 @@ class SignUpForm extends Component {
   }
   async handleSubmit(e) {
     e.preventDefault();
-    const response = await axios.post(`${baseURL}/user`, {
+    const response = await axios.post(`${baseURL}/user/sign-up`, {
       firstname: this.state.firstname,
       lastname: this.state.lastname,
       dob: this.state.dob,

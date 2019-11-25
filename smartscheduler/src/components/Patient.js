@@ -1,4 +1,4 @@
-//Notes: 
+//Notes:
 //Patient Dashboard needs patient name and details at top. States have fields but other code needs to be written to display them.
 //nav bar on left
 //add box with "No Appointments Scheduled" & Button below that stating "Schedule Appointment"
@@ -8,7 +8,6 @@ import axios from "axios";
 import NewAppt from "./NewAppt.js";
 import ShowAppt from "./ShowAppt.js";
 import UpdateAppt from "./UpdateAppt.js";
-
 
 let baseURL = process.env.REACT_APP_BASEURL;
 
@@ -32,9 +31,8 @@ class Patient extends Component {
       time: "",
       appointments: [],
       appointment: {},
-      selectedAppointment: {}, 
+      selectedAppointment: {},
       editButton: false
-
     };
     this.getAppointments = this.getAppointments.bind(this);
     this.deleteAppointments = this.deleteAppointments.bind(this);
@@ -54,14 +52,13 @@ class Patient extends Component {
   }
 
   async editAppointments(clickedAppointment) {
-    console.log('Clicked Edit Button');
+    console.log("Clicked Edit Button");
     await this.setState({
       editButton: !this.state.editButton,
       selectedAppointment: clickedAppointment
     });
-    console.log('Current Appointment: ', this.state.selectedAppointment);
+    console.log("Current Appointment: ", this.state.selectedAppointment);
   }
-
 
   async deleteAppointments(id) {
     await axios.delete(`${baseURL}/appointment/${id}`);
@@ -98,8 +95,13 @@ class Patient extends Component {
   }
 
   render() {
-    const showUpdateAppt= this.state.editButton ? <UpdateAppt appointment={ this.state.selectedAppointment } getAppointments={ this.state.getAppointments } /> : null;
-    
+    const showUpdateAppt = this.state.editButton ? (
+      <UpdateAppt
+        appointment={this.state.selectedAppointment}
+        getAppointments={this.state.getAppointments}
+      />
+    ) : null;
+
     return (
       <div className="container">
         <h1>Welcome Molly Weasley</h1>
@@ -107,54 +109,66 @@ class Patient extends Component {
         <h1>My Appointments</h1>
         <NewAppt getAppointments={this.getAppointments} baseURL={baseURL} />
         <main>
-          <div >
-          <section>
-            <table className="appointments">
-              <tbody>
-                {this.state.appointments.map(appointment => {
-                  const date = new Date(appointment.date);
-                  const formatDate = date.toDateString()
-                  return (
-                    <tr onMouseOver={() => this.getAppointment(appointment)}
-                      key={ appointment._id }>
-                      <td>
-                        <a href={ appointment } target="_blank">
-                          { formatDate }
-                        </a>
-                      </td>
-                      <td>
-                        { appointment.time }
-                      </td>
-                      {/* note: toggle may not be needed as written - TBD */}
-                      <td
-                        className={ appointment.visited ? "visited" : null}
-                        onDoubleClick={() =>
-                          this.toggleVisited(appointment, appointment._id) }>
-                        {" "}
-                        {appointment.url}
-                      </td>
-                      <td>
-                        <button onClick={() => this.editAppointments(appointment)}>Edit</button>
-                      </td>
-                      <td>
-                        {" "}
-                        <button onClick={() => this.deleteAppointments(appointment._id)}>
-                          Delete{" "}
-                        </button>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </section>
+          <div>
+            <section>
+              <table className="appointments">
+                <tbody>
+                  {this.state.appointments.map(appointment => {
+                    const date = new Date(appointment.date);
+                    const formatDate = date.toDateString();
+                    return (
+                      <tr
+                        onMouseOver={() => this.getAppointment(appointment)}
+                        key={appointment._id}
+                      >
+                        <td>
+                          <a href={appointment} target="_blank">
+                            {formatDate}
+                          </a>
+                        </td>
+                        <td>{appointment.time}</td>
+                        {/* note: toggle may not be needed as written - TBD */}
+                        <td
+                          className={appointment.visited ? "visited" : null}
+                          onDoubleClick={() =>
+                            this.toggleVisited(appointment, appointment._id)
+                          }
+                        >
+                          {" "}
+                          {appointment.url}
+                        </td>
+                        <td>
+                          <button
+                            onClick={() => this.editAppointments(appointment)}
+                          >
+                            Edit
+                          </button>
+                        </td>
+                        <td>
+                          {" "}
+                          <button
+                            onClick={() =>
+                              this.deleteAppointments(appointment._id)
+                            }
+                          >
+                            Delete{" "}
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </section>
           </div>
-          <section> { showUpdateAppt } </section>
+          <section> {showUpdateAppt} </section>
         </main>
         <br />
         <br />
         <br />
-        {this.state.appointment && <ShowAppt appointment={this.state.appointment} />}
+        {this.state.appointment && (
+          <ShowAppt appointment={this.state.appointment} />
+        )}
       </div>
     );
   }
