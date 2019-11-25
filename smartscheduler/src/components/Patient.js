@@ -9,6 +9,8 @@ import NewAppt from "./NewAppt.js";
 import ShowAppt from "./ShowAppt.js";
 import UpdateAppt from "./UpdateAppt.js";
 import Sidebar from "./Sidebar.js";
+import OfficeInfo from "./OfficeInfo.js";
+import Map from "./Map.js"
 
 let baseURL = process.env.REACT_APP_BASEURL;
 
@@ -101,10 +103,13 @@ class Patient extends Component {
     const showUpdateAppt= this.state.editButton ? <UpdateAppt appointment={ this.state.selectedAppointment } getAppointments={ this.state.getAppointments } /> : null;
     return (
       <div className="container">
-        <div className="menu">
+        <div className="container-sidebar">
           < Sidebar/>
         </div>
         <div className="container-mainContent">
+          <div className="dashboard-header">
+            <p>Dashboard</p>
+          </div>
           {/* <div class="Card">
             <div class="card-content">
               <div class="content">
@@ -170,6 +175,12 @@ class Patient extends Component {
           <br />
           {this.state.appointment && <ShowAppt appointment={this.state.appointment} />}
         </div>
+        {/* <div className="container-office-info"> */}
+          <div className="container-officeHours">
+            <OfficeInfo />
+            <Map />
+          </div>
+        {/* </div> */}
       </div>
     );
   }

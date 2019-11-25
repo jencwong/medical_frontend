@@ -1,24 +1,38 @@
 
-body {
-   /* text-align: center;  */
- }
 h1 {
   color: blue;
 }
 h2 {
-  color: rgb(64, 64, 241);
+  color: rgb(45, 103, 230);
+  margin-left: 35px;
+  margin-bottom: -10px;
+  margin-top: 20px;
 }
-.appointments {
-   /* text-align: center;  */
- }
+button {
+  color: blue;
+  font-size: 10pt;
+}
 table {
  /* text-align: center;  */
  border-collapse: collapse;
+ }
+ td{
+  padding: 0px 10px 5px;
  }
  form {
    display: flex;
    flex-direction: column;
    min-width: 500px;
+ }
+ .dashboard-header {
+   color: white;
+   background-color: blue;
+   padding-left: 25px;
+   font-size: 20px;
+   margin-left: -12px;
+   -webkit-box-shadow: 3px 3px 4px -3px #62617c;
+    box-shadow:  3px 3px 4px -3px #62617c;
+    margin-bottom: 10px;
  }
  .inputData {
    font-size: 10pt;
@@ -27,8 +41,10 @@ table {
  }
  .submitBtn {
    color: blue;
-   font-weight: 20px;
-   margin: 12px;
+   /* font-weight: 40px; */
+   margin: 15px;
+   /* padding: 5px; */
+   /* width: 100px; */
  }
  label {
    font-weight: 500;
@@ -38,21 +54,29 @@ table {
   border-bottom: 1px solid rgb(188, 189, 190);
   line-height: 2em;
 }
-
 .container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  border-color: blue;
   margin: 20px;
+}
+iframe {
+  width: 600;
+  height: 450;
+  frameborder: 0  style="border:0;" allowfullscreen="">
 }
 .container-mainContent {
   display: flex;
   flex-direction: column;
-  border-color: blue;
+  border: 1px solid lightgray;
   margin: 20px;
 }
-
+.userImg {
+  border-radius: 50%;
+  width: 35%;
+  height: 33%;
+  padding: 2px;
+}
 .card-content {
   border: 1px solid lightgray;
   margin: 20px;
@@ -60,20 +84,41 @@ table {
   box-shadow:  3px 3px 4px -3px #62617c;
   padding: 20px;
 }
-.menu {
+.container-sidebar {
   display: flex;
   flex-direction: column;
   border: 1px solid lightgray;
-  margin: 20px;
+  margin-left: 45px;
+  margin-top: 50px;
   padding: 20px;
+  height: 250px;
 }
 .sidebar {
-  max-width: 240px;
-  height: 100px;;
-  
+  max-width: 220px;
+  width: auto;
+  height: auto;
   /* border: 1px solid rgba(0, 0, 0, 0.1); */
 }
 .menu-label {
   font-size: 18px;
   font-weight: 600;
+}
+.container-office-info {
+  display: flex;
+  flex-direction: column;
+}
+.container-officeHours {
+  border: 1px solid lightgray;
+  padding: 0 10px;
+  font-size: 10pt;
+  height: 400px;
+  margin-top: 100px;
+  width: 265px;
+}
+
+.office-map {
+  margin-top: 40px;
+  border: 1px solid lightgray;
+  padding: 10px;
+  width: 90%;
 }
