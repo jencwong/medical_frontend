@@ -174,7 +174,6 @@ class AdminMain extends Component {
   }
 }
 export default AdminMain;
-Collapse
 
 
 
