@@ -1,18 +1,20 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+//Note: name, dob, email, phone, doctor, and visited are not needed right now and are therefore commented. 
 class NewAppt extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      dob: "",
-      email: "",
-      phone: "",
+      // name: "",
+      // dob: "",
+      // email: "",
+      // phone: "",
       date: "",
       time: "",
-      vistType: "",
-      doctor: "",
+      visitType: "",
+      comments: "",
+      // doctor: "",
       // visited: ""
     };
     this.handleChange = this.handleChange.bind(this);
@@ -28,91 +30,67 @@ class NewAppt extends Component {
     event.preventDefault();
     console.log("test");
     const baseURL = this.props.baseURL;
-    const response = await axios.post(`${baseURL}/appointments`, {
-      name: this.state.name,
-      dob: this.state.dob,
-      email: this.state.email,
-      phone: this.state.phone,
+    const response = await axios.post(`${baseURL}/appointment`, {
+      date: this.state.date,
+      time: this.state.time,
       visitType: this.state.visitType,
-      doctor: this.state.doctor,
+      comments: this.state.comments,
     });
     this.setState({
-      firstName: "",
-      lastName: "",
-      dob: "",
-      email: "",
-      phone: "",
+      date: "",
+      time: "",
       visitType: "",
       comments: "",
-      doctor: "",
     });
     this.props.getAppointments();
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor="name"></label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          onChange={this.handleChange}
-          value={this.state.name}
-          placeholder="Enter Your Name"
-        />
-        <label htmlFor="dob"></label>
-        <input
-          type="text"
-          id="dob"
-          name="dob"
-          onChange={this.handleChange}
-          value={this.state.dob}
-          placeholder="Date of Birth"
-        />
-        <label htmlFor="email"></label>
-        <input
-          type="text"
-          id="email"
-          name="email"
-          onChange={this.handleChange}
-          value={this.state.email}
-          placeholder="Email"
-        />
-        <label htmlFor="phone"></label>
-        <input
-          type="text"
-          id="phone"
-          name="phone"
-          onChange={this.handleChange}
-          value={this.state.phone}
-          placeholder="Phone Number"
-        />
-        <input
-          type="text"
-          id="visitType"
-          name="visitType"
-          onChange={this.handleChange}
-          value={this.state.visitType}
-          placeholder="Reason for Visit"
-        />
-         <textarea
-          id="comments"
-          name="comments"
-          onChange={this.handleChange}
-          value={this.state.comments}
-          placeholder="Comments / Reason for Visit"
-        />
-        <input
-          type="text"
-          id="doctor"
-          name="visitType"
-          onChange={this.handleChange}
-          value={this.state.visitType}
-          placeholder="Reason for Visit"
-        />
-        <input type="submit" value="SUBMIT" />
-      </form>
+      <div className="card-content">
+        <form onSubmit={this.handleSubmit}>
+          <label htmlFor="date">Date</label>
+          <input className="inputData"
+            type="date"
+            id="date"
+            name="date"
+            onChange={this.handleChange}
+            value={this.state.date}
+            placeholder="Enter Date"
+          />
+          <label htmlFor="time">Time</label>
+          <input className="inputData"
+            type="time"
+            id="time"
+            name="time"
+            onChange={this.handleChange}
+            value={this.state.time}
+            placeholder="Enter Appointment Time"
+          />
+          <label htmlFor="visitType">Appointment Type</label>
+          <input className="inputData"
+            type="text"
+            id="visitType"
+            name="visitType"
+            onChange={this.handleChange}
+            value={this.state.visitType}
+            placeholder="Enter Reason for Visit"
+          />
+          <label htmlFor="coments">Comments / Additional Information</label>
+          <textarea className="inputData"
+            id="comments"
+            name="comments"
+            onChange={this.handleChange}
+            value={this.state.comments}
+            placeholder="Enter Comments / Additional Information"
+          />
+          <input 
+          className="submitBtn" 
+          type="submit" 
+          value="SUBMIT" 
+          />
+        </form>
+      </div>
     );
   }
 }

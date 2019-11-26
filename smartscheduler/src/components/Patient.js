@@ -1,57 +1,103 @@
+//Notes:
+//Patient Dashboard needs patient name and details at top. States have fields but other code needs to be written to display them.
+//nav bar on left
+//add box with "No Appointments Scheduled" & Button below that stating "Schedule Appointment"
 import React, { Component } from "react";
-import "./App.css";
+import jwt_decode from "jwt-decode";
+import "../App2.css";
 import axios from "axios";
-import NewAppt from "./components/NewAppt.js";
-import ShowAppt from "./components/ShowAppt.js";
-import UpdateAppt from "./components/UpdateAppt.js";
+import NewAppt from "./NewAppt.js";
+import ShowAppt from "./ShowAppt.js";
+import UpdateAppt from "./UpdateAppt.js";
+import Sidebar from "./Sidebar.js";
+import OfficeInfo from "./OfficeInfo.js";
+import Map from "./Map.js";
 
-//The following commented out code was moved to MainContent:
-// let baseURL = process.env.REACT_APP_BASEURL;
+// import CurrentAppointments from ".CurrentAppointments.js";
 
-// if (process.env.NODE_ENV === "development") {
-//   baseURL = "http://localhost:3003";
-// } else {
-//   baseURL = "heroku or other backend url here";
-// }
+let baseURL = process.env.REACT_APP_BASEURL;
+
+if (process.env.NODE_ENV === "development") {
+  baseURL = "http://localhost:3003";
+} else {
+  baseURL = "heroku or other backend url here";
+}
 
 class Patient extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      firstName: "",
+      lastName: "",
+      dob: "",
+      email: "",
+      user: {},
+      phone: "",
+      comments: "",
+      visitType: "",
+      time: "",
       appointments: [],
       appointment: {},
-      selectedAppointment: {}, 
+      selectedAppointment: {},
+      loggedInUser: "",
       editButton: false
     };
+    this.logOut = this.logOut.bind(this);
     this.getAppointments = this.getAppointments.bind(this);
     this.deleteAppointments = this.deleteAppointments.bind(this);
-    // this.toggleVisited = this.toggleVisited.bind(this);
+    this.toggleVisited = this.toggleVisited.bind(this);
     this.editAppointments = this.editAppointments.bind(this);
   }
 
   componentDidMount() {
     this.getAppointments();
+    const token = localStorage.usertoken;
+    const decoded = jwt_decode(token);
+    this.setState({
+      firstName: decoded.firstName,
+      lastName: decoded.lastName,
+      dob: decoded.dob,
+      email: decoded.email,
+      password: decoded.password
+    });
+    console.log(this.state);
+  }
+  logOut(e) {
+    e.preventDefault();
+    localStorage.removeItem("usertoken");
+    this.props.history.push(`/auth`);
+  }
+
+  async testLogin() {
+    const response = await axios.post(`${baseURL}/session`, {
+      username: "",
+      password: "",
+      category: ""
+    });
+    const user = response.data;
+
+    this.setState({ loggedInUser: user });
   }
 
   async getAppointments() {
-    const response = await axios(`${baseURL}/appointments`);
+    const response = await axios(`${baseURL}/appointment`);
     const appointments = response.data;
 
     this.setState({ appointments: appointments });
   }
 
   async editAppointments(clickedAppointment) {
-    console.log('Clicked Edit Button');
+    console.log("Clicked Edit Button");
     await this.setState({
       editButton: !this.state.editButton,
       selectedAppointment: clickedAppointment
     });
-    console.log('Current Appointment: ', this.state.selectedAppointment);
+    console.log("Current Appointment: ", this.state.selectedAppointment);
   }
 
-
+  async getPatients() {}
   async deleteAppointments(id) {
-    await axios.delete(`${baseURL}/appointments/${id}`);
+    await axios.delete(`${baseURL}/appointment/${id}`);
     const filteredAppointments = this.state.appointments.filter(appointment => {
       return appointment._id !== id;
     });
@@ -85,53 +131,97 @@ class Patient extends Component {
   }
 
   render() {
-    const showUpdateAppt= this.state.editButton ? <UpdateAppt appointment={ this.state.selectedAppointment } getAppointments={ this.state.getAppointments } /> : null;
+    const showUpdateAppt = this.state.editButton ? (
+      <UpdateAppt
+        appointment={this.state.selectedAppointment}
+        getAppointments={this.getAppointments}
+      />
+    ) : null;
     return (
-      <div className="container">
-        <h1>My Appointments</h1>
-        <NewAppt getAppointments={this.getAppointments} baseURL={baseURL} />
-        <main>
-          <section>
-            <table>
-              <tbody>
-                {this.state.appointments.map(appointment => {
-                  return (
-                    <tr onMouseOver={() => this.getAppointment(appointment)}
-                      key={ appointment._id }>
-                      <td>
-                        <a href={"http://" + appointment.url} target="_blank">
-                          { appointment.name }
-                        </a>
-                      </td>
-                      {/* note: toggle may not be needed as written - TBD */}
-                      <td
+      <div>
+        <div className="dashboard-header">
+          <span className="banner">mediCal</span>
+          <button className="logout" onClick={this.logOut}>
+            Logout
+          </button>
+        </div>
+        <div className="container">
+          <div className="container-sidebar">
+            <Sidebar />
+          </div>
+          <div className="container-mainContent">
+            <h2>Schedule An Appointment {this.state.firstName} </h2>
+            <NewAppt getAppointments={this.getAppointments} baseURL={baseURL} />
+            <h2>Current Appointments</h2>
+
+            <div className="card-content">
+              <table className="table">
+                <tbody>
+                  {this.state.appointments.map(appointment => {
+                    const date = new Date(appointment.date);
+                    const formatDate = date.toDateString();
+                    return (
+                      <tr
+                        className="bordered"
+                        onMouseOver={() => this.getAppointment(appointment)}
+                        key={appointment._id}
+                      >
+                        <td>
+                          <a href={appointment} target="_blank">
+                            {formatDate}
+                          </a>
+                        </td>
+                        <td>{appointment.time}</td>
+                        {/* note: toggle may not be needed as written - TBD */}
+                        {
+                          /* <td
                         className={ appointment.visited ? "visited" : null}
                         onDoubleClick={() =>
                           this.toggleVisited(appointment, appointment._id) }>
                         {" "}
                         {appointment.url}
-                      </td>
-                      <td>
-                        <button onClick={() => this.editAppointments(appointment)}>Edit</button>
-                      </td>
-                      <td>
-                        {" "}
-                        <button onClick={() => this.deleteAppointments(appointment._id)}>
-                          DELETE{" "}
-                        </button>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </section>
-          <section> { showUpdateAppt } </section>
-        </main>
-        <br />
-        <br />
-        <br />
-        {this.state.appointment && <ShowAppt appointment={this.state.appointment} />}
+                      </td>*/
+                          <td>
+                            <button
+                              className="patient-button"
+                              onClick={() => this.editAppointments(appointment)}
+                            >
+                              Edit
+                            </button>
+                          </td>
+                        }
+                        <td>
+                          {" "}
+                          <button
+                            className="patient-button"
+                            onClick={() =>
+                              this.deleteAppointments(appointment._id)
+                            }
+                          >
+                            Delete{" "}
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+            <div> {showUpdateAppt} </div>
+            <br />
+            <br />
+            <br />
+            {this.state.appointment && (
+              <ShowAppt appointment={this.state.appointment} />
+            )}
+          </div>
+          {/* <div className="container-office-info"> */}
+          <div className="container-officeHours">
+            <OfficeInfo />
+            <Map />
+          </div>
+          {/* </div> */}
+        </div>
       </div>
     );
   }
