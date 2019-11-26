@@ -77,6 +77,7 @@ import Profile from "./Patient";
 import AdminMain from "./AdminMain";
 import {
   BrowserRouter as Router,
+  withRouter,
   Route,
   Link,
   NavLink,
@@ -88,9 +89,15 @@ class Main extends Component {
     return (
       <>
         <Router>
-          <Route exact path="/admin/profile" component={AdminMain} />
-          <Route exact path="/user/profile" component={Profile} />
-          <Route exact path="/auth" component={FrontLogin} />
+          <Switch>
+            <Route
+              exact
+              path="/admin/profile"
+              component={withRouter(AdminMain)}
+            />
+            <Route exact path="/user/profile" component={Profile} />
+            <Route exact path="/auth" component={FrontLogin} />
+          </Switch>
         </Router>
       </>
     );
