@@ -37,7 +37,7 @@ class Patient extends Component {
       appointments: [],
       appointment: {},
       selectedAppointment: {},
-      loggedInUser: {},
+      loggedInUser: "5dd7ec7276f4f62c8421b83d",
       editButton: false
     };
     this.getAppointments = this.getAppointments.bind(this);

@@ -1,34 +1,45 @@
-import React from 'react'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
-import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
+import React from "react";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+
+import ProfileModal from "./ProfileModal";
 
 function Sidebar() {
   return (
     <div className="sidebar">
-        <img className="userImg" src="https://vignette.wikia.nocookie.net/harrypotter/images/1/15/MOLLY1.jpg/revision/latest/scale-to-width-down/350?cb=20150828155116"></img>
-        <p className="menu-label">
-          Welcome 
-          {/* { this.props.users.firstName }  */}
-        </p>
-        <br></br>
-        <List disablePadding dense>
-        <ListItem button>
-            <ListItemText>Dasbboard</ListItemText>
+      <img
+        className="userImg"
+        src="https://vignette.wikia.nocookie.net/harrypotter/images/1/15/MOLLY1.jpg/revision/latest/scale-to-width-down/350?cb=20150828155116"
+      ></img>
+      <p className="menu-label">
+        Welcome
+        {/* {this.props.users.firstName} */}
+      </p>
+      <br></br>
+      <List disablePadding dense>
+        <ListItem>
+          <Button
+            variant="contained"
+            // color="primary"
+            style={{ background: "#C6D166" }}
+          >
+            Payment
+          </Button>
         </ListItem>
         <ListItem button>
-            <ListItemText>User Profile</ListItemText>
+          <ListItemText>
+            <ProfileModal />
+          </ListItemText>
         </ListItem>
-        </List>
+      </List>
     </div>
-  )
+  );
 }
 
-export default Sidebar
-
-
+export default Sidebar;
 
 // function rand() {
 //   return Math.round(Math.random() * 20) - 10;

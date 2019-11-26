@@ -50,6 +50,8 @@ class ShowAppt extends React.Component {
     this.setState({ appointment: appointment });
   }
   render() {
+    const date = new Date(this.props.appointment.date);
+    const formatDate = date.toDateString();
     return (
       <div class="card">
         <hr></hr>
@@ -70,7 +72,7 @@ class ShowAppt extends React.Component {
               appointment.{" "}
             </h4> */}
             <h5>
-              <span>Date:</span> {this.props.appointment.date}
+              <span>Date:</span> {formatDate}
               <br />
               <span>Time:{this.props.appointment.time}</span>
             </h5>
