@@ -74,6 +74,7 @@
 import FrontLogin from "./FrontLogin";
 import React, { Component } from "react";
 import Profile from "./Patient";
+import AdminMain from "./AdminMain";
 import {
   BrowserRouter as Router,
   Route,
@@ -87,6 +88,7 @@ class Main extends Component {
     return (
       <>
         <Router>
+          <Route exact path="/admin/profile" component={AdminMain} />
           <Route exact path="/user/profile" component={Profile} />
           <Route exact path="/auth" component={FrontLogin} />
         </Router>

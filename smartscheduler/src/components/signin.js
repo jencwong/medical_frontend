@@ -13,7 +13,8 @@ class SignInForm extends Component {
       lastName: "",
       dob: "",
       email: "",
-      password: ""
+      password: "",
+      category: null
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,24 +26,26 @@ class SignInForm extends Component {
 
     this.setState({ [name]: value });
   }
-
   async handleSubmit(e) {
     e.preventDefault();
     const response = await axios.post(`${baseURL}/user/login`, {
       email: this.state.email,
-      password: this.state.password,
-      firstName: this.state.firstName
+      password: this.state.password
     });
     localStorage.setItem("usertoken", response.data);
+    console.log("submit post data", response.data);
 
-    this.props.history.push("/user/profile");
+    this.state.email === "admin@gmail.com"
+      ? this.props.history.push("/admin/profile")
+      : this.props.history.push("/user/profile");
 
     this.setState({
       firstName: "",
       lastName: "",
       dob: "",
       email: "",
-      password: ""
+      password: "",
+      category: ""
     });
   }
 
