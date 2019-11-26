@@ -53,39 +53,27 @@ class ShowAppt extends React.Component {
     const date = new Date(this.props.appointment.date);
     const formatDate = date.toDateString();
     return (
-      <div class="card">
+      <div className="card">
         <hr></hr>
         <hr></hr>
         <br></br>
         <h2>Appointment Details</h2>
-        {/* <button>
-          <NewAppt handleAddAppointment={this.handleAddAppointment} />
-          Schedule New Appointment
-        </button> */}
-        <div class="card-content">
-          <div>
+        <div className="card-content">
+          <br />
+          <h5>
+            <span>Date:</span> {formatDate}
             <br />
-
-            {/* <h4>
-              {" "}
-              Hi {this.props.users.firstName}, below are details for your next
-              appointment.{" "}
-            </h4> */}
-            <h5>
-              <span>Date:</span> {formatDate}
-              <br />
-              <span>Time:{this.props.appointment.time}</span>
-            </h5>
-            <h5>
-              <span>Visit Type:</span> {this.props.appointment.visitType}
-            </h5>
-            <h5>
-              <span>Comments:</span> {this.props.appointment.comments}
-            </h5>
-            {/* <button onClick={() => this.deleteAppointments(appointment._id)}>
+            <span>Time:{this.props.appointment.time}</span>
+          </h5>
+          <h5>
+            <span>Visit Type:</span> {this.props.appointment.visitType}
+          </h5>
+          <h5>
+            <span>Comments:</span> {this.props.appointment.comments}
+          </h5>
+          {/* <button onClick={() => this.deleteAppointments(appointment._id)}>
                           DELETE{" "}
                         </button> */}
-          </div>
         </div>
       </div>
     );

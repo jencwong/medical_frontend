@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
 import UserProfile from "./UserProfile";
+import FormControlLabel from '@material-ui/core/FormControlLabel'
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -26,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     position: "absolute",
-    width: 450,
+    width: 550,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3)
