@@ -167,7 +167,6 @@ class AdminMain extends Component {
             {this.state.appointment && (
               <ShowAppt appointment={this.state.appointment} />
             )}
-            )}
           </tbody>
         </table>
       </div>
@@ -175,16 +174,3 @@ class AdminMain extends Component {
   }
 }
 export default AdminMain;
-
-
-
-
-
-
-
-
-
-
-
-
-
