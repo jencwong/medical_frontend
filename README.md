@@ -13,10 +13,8 @@ screenshots here.....
 The landing page introduces the user to the scheduling application. A link leads the user to a login and signup page which is the gateway to patient and doctor dashboards. Patients are brought to dashboard where they can schedule new, see existing, edit or delete appointments; doctors will be brought to a separate dashboard with current and upcoming appointments as well as messages from patients. 
 
 ## Features (Patient)
-- Patients can: 
-  -View, edit and delete current appointments.
-  -Schedule a new appointment, including the general reason for the visit and additional comments to help doctors quickly assess the patients needs.
-  -View and edit their user profile. 
+- Patients can view, edit and delete current appointments; Schedule a new appointment; and View or edit their user profile.
+- When adding a new appointment, patients select the general reason for the visit and add additional information as desired to help doctors quickly assess the patients needs.
 - Upon hovering over an exisiting appointment, patients are presented with a dynamically updated display of the appointment details. 
 - Buttons for logout and user profile are available in the navigation. Upon clicking the 'User Profile' button, a modal pops up for the user to view and edit their information.
 
