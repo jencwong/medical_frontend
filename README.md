@@ -14,15 +14,15 @@ The landing page introduces the user to the scheduling application. A link leads
 
 ## Features (Patient)
 - Patients can: 
---View, edit and delete current appointments.
---Schedule a new appointment, including the general reason for the visit and additional comments to help doctors quickly assess the patients needs.
---View and edit their user profile. 
+ -View, edit and delete current appointments.
+ -Schedule a new appointment, including the general reason for the visit and additional comments to help doctors quickly assess the patients needs.
+ -View and edit their user profile. 
 - Upon hovering over an exisiting appointment, patients are presented with a dynamically updated display of the appointment details. 
 - Buttons for logout and user profile are available in the navigation. Upon clicking the 'User Profile' button, a modal pops up for the user to view and edit their information.
 
 ## Features (Doctor)
 - Doctors can:
--- ....
+ - ....
 
 ## Approach
 - The project was a team effort. Upon formation of the team, we gathered and discussed ideas. A rough sketch of the application was drawn and high level requirements written. We decided to set up a basic application and identified features for phase 2 or phase 3 of the project. We used Trello to track our progress. We collaborated or divided up work as we went along. 
