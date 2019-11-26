@@ -9,6 +9,9 @@ class SignInForm extends Component {
     super();
 
     this.state = {
+      firstName: "",
+      lastName: "",
+      dob: "",
       email: "",
       password: ""
     };
@@ -27,13 +30,17 @@ class SignInForm extends Component {
     e.preventDefault();
     const response = await axios.post(`${baseURL}/user/login`, {
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
+      firstName: this.state.firstName
     });
     localStorage.setItem("usertoken", response.data);
 
     this.props.history.push("/user/profile");
 
     this.setState({
+      firstName: "",
+      lastName: "",
+      dob: "",
       email: "",
       password: ""
     });
@@ -41,6 +48,7 @@ class SignInForm extends Component {
 
   componentWillUnmount() {
     console.log("UNMOUNTING SIGNIN");
+    console.log(this.state);
   }
 
   render() {

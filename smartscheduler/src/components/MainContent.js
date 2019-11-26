@@ -73,7 +73,7 @@
 
 import FrontLogin from "./FrontLogin";
 import React, { Component } from "react";
-import Profile from "./profile";
+import Profile from "./Patient";
 import {
   BrowserRouter as Router,
   Route,

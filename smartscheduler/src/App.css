@@ -1,10 +1,5 @@
-
 .App {
   height: 100vh;
-  display: flex;
-  color: white;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
 }
 
 .App__Aside {

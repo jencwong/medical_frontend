@@ -8,13 +8,12 @@ class SignUpForm extends Component {
     super();
 
     this.state = {
-      firstname: "",
-      lastname: "",
+      firstName: "",
+      lastName: "",
       dob: "",
       email: "",
       phone: "",
       category: "",
-      username: "",
       password: "",
       hasAgreed: false
     };
@@ -32,13 +31,12 @@ class SignUpForm extends Component {
     e.preventDefault();
     const response = await axios
       .post(`${baseURL}/user/register`, {
-        firstname: this.state.firstname,
-        lastname: this.state.lastname,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
         dob: this.state.dob,
         email: this.state.email,
         phone: this.state.phone,
         category: this.state.category,
-        username: this.state.username,
         password: this.state.password,
         hasAgreed: false
       })
@@ -49,13 +47,13 @@ class SignUpForm extends Component {
         console.log(err);
       });
     this.setState({
-      firstname: "",
-      lastname: "",
+      firstName: "",
+      lastName: "",
       dob: "",
       email: "",
       phone: "",
       category: "",
-      username: "",
+
       password: "",
       hasAgreed: false
     });
@@ -73,8 +71,8 @@ class SignUpForm extends Component {
               id="first-name"
               className="FormField__Input"
               placeholder="First Name"
-              name="firstname"
-              value={this.state.firstname}
+              name="firstName"
+              value={this.state.firstName}
               onChange={this.handleChange}
             ></input>
           </div>
@@ -87,8 +85,8 @@ class SignUpForm extends Component {
               id="lastname"
               className="FormField__Input"
               placeholder="Enter your full lastname"
-              name="lastname"
-              value={this.state.lastname}
+              name="lastName"
+              value={this.state.lastName}
               onChange={this.handleChange}
             ></input>
           </div>
@@ -180,7 +178,6 @@ class SignUpForm extends Component {
               </a>
             </label>
           </div>
-
           <div className="FormField">
             <button
               className="FormField__Button mr-20"
