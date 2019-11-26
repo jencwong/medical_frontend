@@ -25,7 +25,7 @@ The landing page introduces the user to the scheduling application. A link leads
 -- ....
 
 ## Approach
-- The project was a team effort. Upon formation of the team, we gathered and discussed ideas. A rough sketch of the application was drawn and high level requirements written. We used Trello to track our progress. 
+- The project was a team effort. Upon formation of the team, we gathered and discussed ideas. A rough sketch of the application was drawn and high level requirements written. We decided to set up a basic application and identified features for phase 2 or phase 3 of the project. We used Trello to track our progress. We collaborated or divided up work as we went along. 
 
 ## Technologies
 - Node.js
