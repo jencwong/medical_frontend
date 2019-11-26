@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import MainContent from "./components/MainContent";
 import Header from "./components/Header";
 import Patient from "./components/Patient";
 import axios from "axios";
@@ -11,9 +12,10 @@ import AdminMain from "./components/AdminMain.js";
 function App() {
   return (
     <div>
+      <MainContent />
       {/* <Header /> */}
-      <Patient />
-      <AdminMain />
+      {/* <Patient />
+      <AdminMain /> */}
       {/* <Footer /> */}
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
+import "../seymurapp.css";
 const baseURL = "http://localhost:3003";
 
 class SignUpForm extends Component {
@@ -30,17 +30,24 @@ class SignUpForm extends Component {
   }
   async handleSubmit(e) {
     e.preventDefault();
-    const response = await axios.post(`${baseURL}/user/sign-up`, {
-      firstname: this.state.firstname,
-      lastname: this.state.lastname,
-      dob: this.state.dob,
-      email: this.state.email,
-      phone: this.state.phone,
-      category: this.state.category,
-      username: this.state.username,
-      password: this.state.password,
-      hasAgreed: false
-    });
+    const response = await axios
+      .post(`${baseURL}/user/register`, {
+        firstname: this.state.firstname,
+        lastname: this.state.lastname,
+        dob: this.state.dob,
+        email: this.state.email,
+        phone: this.state.phone,
+        category: this.state.category,
+        username: this.state.username,
+        password: this.state.password,
+        hasAgreed: false
+      })
+      .then(response => {
+        this.props.history.push("/sign-in");
+      })
+      .catch(err => {
+        console.log(err);
+      });
     this.setState({
       firstname: "",
       lastname: "",
@@ -112,6 +119,20 @@ class SignUpForm extends Component {
               value={this.state.email}
               onChange={this.handleChange}
             ></input>
+            <div className="FormField">
+              <label className="FormField__Label" htmlFor="password">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                className="FormField__Input"
+                placeholder="Enter your password"
+                name="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+              ></input>
+            </div>
           </div>
           <div className="FormField">
             <label className="FormField__Label" htmlFor="phone">
@@ -138,34 +159,6 @@ class SignUpForm extends Component {
               />
               Doctor?
             </label>
-          </div>
-          <div className="FormField">
-            <label className="FormField__Label" htmlFor="username">
-              Username
-            </label>
-            <input
-              type="username"
-              id="username"
-              className="FormField__Input"
-              placeholder="Enter your username"
-              name="username"
-              value={this.state.username}
-              onChange={this.handleChange}
-            ></input>
-          </div>
-          <div className="FormField">
-            <label className="FormField__Label" htmlFor="password">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              className="FormField__Input"
-              placeholder="Enter your password"
-              name="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-            ></input>
           </div>
 
           <div className="FormField">
@@ -195,13 +188,6 @@ class SignUpForm extends Component {
             >
               Sign Up
             </button>
-            <Link
-              to="/sign-in"
-              classname="FormField__Link"
-              style={{ color: "white", padding: "5px" }}
-            >
-              I'm already a member
-            </Link>
           </div>
         </form>
       </div>

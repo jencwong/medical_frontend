@@ -1,9 +1,8 @@
-//NOTE: Temporarily commented out so we can work on the other components. Once login is complete, this can be added back. 
+//NOTE: Temporarily commented out so we can work on the other components. Once login is complete, this can be added back.
 
 // import React, { Component } from "react";
 // import Header from "./Header";
 // import Patient from "./Patient.js";
-
 
 // let baseURL = process.env.REACT_APP_BASEURL;
 // if (process.env.NODE_ENV === "development") {
@@ -64,10 +63,36 @@
 //           </div>
 //         </main>
 //         {/* <Footer /> */}
-      
+
 //       </div>
 //     );
 //   }
 // }
 
 // export default MainContent;
+
+import FrontLogin from "./FrontLogin";
+import React, { Component } from "react";
+import Profile from "./profile";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  NavLink,
+  Switch
+} from "react-router-dom";
+
+class Main extends Component {
+  render() {
+    return (
+      <>
+        <Router>
+          <Route exact path="/user/profile" component={Profile} />
+          <Route exact path="/auth" component={FrontLogin} />
+        </Router>
+      </>
+    );
+  }
+}
+
+export default Main;

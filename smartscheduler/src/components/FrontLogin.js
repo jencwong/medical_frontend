@@ -1,77 +1,64 @@
-import React from "react";
-import "../App.css";
-import Particles from "react-particles-js";
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  NavLink
-} from "react-router-dom";
-import SignUpForm from "./SignUpForm";
-import SignInForm from "./SignInForm";
+import React, { Component } from "react";
+import "../seymurapp.css";
+import SignUpForm from "./signup";
+import SignInForm from "./signin";
 
-const particleOpt = {
-  particles: {
-    number: {
-      value: 150,
-      density: {
-        enable: true,
-        value_area: 900
-      }
-    }
+class FrontLogin extends Component {
+  constructor() {
+    super();
+    this.state = {
+      renderSignIn: true
+    };
+    this.switchStateSignUp = this.switchStateSignUp.bind(this);
+    this.switchStateSignIn = this.switchStateSignIn.bind(this);
   }
-};
 
-function FrontLogin() {
-  return (
-    <Router>
-      <div className="App">
-        <div className="App__Aside" refs="stars">
-          <nav className="reach">Reach</nav>
-          <Particles params={particleOpt} className="particles"></Particles>
-        </div>
-        <div className="App__Form">
-          <div className="PageSwitcher">
-            <NavLink
-              to="/sign-in"
-              className="PageSwitcher__Item"
-              activeClassName="PageSwitcher__Item--Active"
-            >
-              Sign In
-            </NavLink>
-            <NavLink
-              exact
-              to="/sign-up"
-              className="PageSwitcher__Item"
-              activeClassName="PageSwitcher__Item--Active"
-            >
-              Sign Up
-            </NavLink>
+  switchStateSignIn() {
+    this.setState({
+      renderSignIn: true
+    });
+  }
+  switchStateSignUp() {
+    this.setState({
+      renderSignIn: false
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <div className="Frontapp">
+          <div className="App__Aside" refs="stars"></div>
+          <div className="App__Form">
+            <div className="PageSwitcher">
+              <div
+                to="/sign-in"
+                className="PageSwitcher__Item"
+                onClick={this.switchStateSignIn}
+              >
+                Sign In
+              </div>
+              <div
+                exact
+                to="/sign-up"
+                className="PageSwitcher__Item"
+                onClick={this.switchStateSignUp}
+              >
+                Sign Up
+              </div>
+            </div>
+            <div className="FormTitle">
+              <img
+                src="https://www.flaticon.com/premium-icon/icons/svg/626/626892.svg"
+                className="dna-image"
+              />
+            </div>
+            {this.state.renderSignIn ? <SignInForm /> : <SignUpForm />}
           </div>
-          <div className="FormTitle">
-            <NavLink
-              to="/sign-in"
-              className="FormTitle__Link"
-              activeClassName="FormTitle__Link--Active"
-            >
-              Sign In
-            </NavLink>
-            or
-            <NavLink
-              exact
-              to="/sign-up"
-              className="FormTitle__Link"
-              activeClassName="FormTitle__Link--Active "
-            >
-              Sign Up
-            </NavLink>
-          </div>
-          <Route exact path="/sign-up" component={SignUpForm}></Route>
-          <Route path="/sign-in" component={SignInForm}></Route>
         </div>
       </div>
-    </Router>
-  );
+    );
+  }
 }
 
 export default FrontLogin;

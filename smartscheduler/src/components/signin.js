@@ -1,16 +1,16 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Redirect } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import axios from "axios";
+
+const baseURL = "http://localhost:3003";
 
 class SignInForm extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {
-      username: "",
       email: "",
-      password: "",
-      type: ""
+      password: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,10 +22,27 @@ class SignInForm extends Component {
 
     this.setState({ [name]: value });
   }
-  handleSubmit(e) {
+
+  async handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
+    const response = await axios.post(`${baseURL}/user/login`, {
+      email: this.state.email,
+      password: this.state.password
+    });
+    localStorage.setItem("usertoken", response.data);
+
+    this.props.history.push("/user/profile");
+
+    this.setState({
+      email: "",
+      password: ""
+    });
   }
+
+  componentWillUnmount() {
+    console.log("UNMOUNTING SIGNIN");
+  }
+
   render() {
     return (
       <div className="FormCenter">
@@ -61,13 +78,6 @@ class SignInForm extends Component {
 
           <div className="FormField">
             <button className="FormField__Button mr-20">Sign In</button>
-            <Link
-              to="/sign-up"
-              className="FormField__Link"
-              style={{ color: "white", padding: "5px" }}
-            >
-              Create an account
-            </Link>
           </div>
         </form>
       </div>
@@ -75,4 +85,4 @@ class SignInForm extends Component {
   }
 }
 
-export default SignInForm;
+export default withRouter(SignInForm);
