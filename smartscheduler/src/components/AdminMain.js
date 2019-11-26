@@ -4,8 +4,12 @@
 import React, { Component } from "react";
 // import FormNew from "./FormNew.js";
 // import FormUpdate from "./FormUpdate.js";
+import Weather from "./Weather.js";
+import "react-bulma-components/dist/react-bulma-components.min.css";
 import axios from "axios";
 import ShowAppt from "./ShowAppt.js";
+import "../App2.css";
+
 let baseURL = process.env.REACT_APP_BASEURL;
 if (process.env.NODE_ENV === "development") {
   baseURL = "http://localhost:3003";
@@ -89,12 +93,30 @@ class AdminMain extends Component {
   //   }
   render() {
     return (
-      <div className="container is-fluid has-background-grey-lighter">
-        <h1 className="title is-1">Doctor's Dashboard</h1>
-        <h2 className="subtitle is-1">
+      <div>
+        <section className="level">
+          <img src="../images/green_calendar_medical.png"></img>
+          <div className="hero-body">
+            <h1 className="title is-1">Doctor's Dashboard</h1>
+          </div>
+        </section>
+        <div>
+          <h3>{/* <Weather /> */}</h3>
+        </div>
+
+        <h2 className="title is-2" id="AdminDash">
           <strong>Appointment List:</strong>
         </h2>
-        <table className="appointments">
+
+        <table className="table is-striped is-fullwidth">
+          <thead>
+            <tr>
+              <th className="subtitle is-2">First Name</th>
+              <th className="subtitle is-2">Last Name</th>
+              <th className="subtitle is-2">Date</th>
+              <th className="subtitle is-2">Time</th>
+            </tr>
+          </thead>
           <tbody>
             {this.state.appointments.map(appointment => {
               const date = new Date(appointment.date);
@@ -110,12 +132,12 @@ class AdminMain extends Component {
                       onMouseOver={() => this.getAppointment(appointment)}
                       key={appointment._id}
                     >
-                      <td className="subtitle is-2">{user.firstName}</td>
+                      <td className="subtitle is-3">{user.firstName}</td>
 
-                      <td className="subtitle is-2">{user.lastName}</td>
+                      <td className="subtitle is-3">{user.lastName}</td>
 
-                      <td className="subtitle is-2">{formatDate}</td>
-                      <td className="subtitle is-2">{appointment.time}</td>
+                      <td className="subtitle is-3">{formatDate}</td>
+                      <td className="subtitle is-3">{appointment.time}</td>
 
                       {/* {appointment.patientId} */}
                       {/* <p>{user.firstName}</p> */}
@@ -164,12 +186,11 @@ class AdminMain extends Component {
               //   </div>
               // );
             })}
-            {this.state.appointment && (
-              <ShowAppt appointment={this.state.appointment} />
-            )}
-            )}
           </tbody>
         </table>
+        {this.state.appointment && (
+          <ShowAppt appointment={this.state.appointment} />
+        )}
       </div>
     );
   }

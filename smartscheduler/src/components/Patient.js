@@ -8,13 +8,10 @@ import axios from "axios";
 import NewAppt from "./NewAppt.js";
 import ShowAppt from "./ShowAppt.js";
 import UpdateAppt from "./UpdateAppt.js";
-<<<<<<< HEAD
-=======
 import Sidebar from "./Sidebar.js";
 import OfficeInfo from "./OfficeInfo.js";
 import Map from "./Map.js";
 // import CurrentAppointments from ".CurrentAppointments.js";
->>>>>>> cf690827d47c71906ba1cf829b42c2cde2218bbd
 
 let baseURL = process.env.REACT_APP_BASEURL;
 
@@ -39,12 +36,8 @@ class Patient extends Component {
       time: "",
       appointments: [],
       appointment: {},
-<<<<<<< HEAD
       selectedAppointment: {},
-=======
-      selectedAppointment: {}, 
       loggedInUser: {},
->>>>>>> cf690827d47c71906ba1cf829b42c2cde2218bbd
       editButton: false
     };
     this.getAppointments = this.getAppointments.bind(this);
@@ -85,10 +78,7 @@ class Patient extends Component {
     console.log("Current Appointment: ", this.state.selectedAppointment);
   }
 
-<<<<<<< HEAD
-=======
   async getPatients() {}
->>>>>>> cf690827d47c71906ba1cf829b42c2cde2218bbd
   async deleteAppointments(id) {
     await axios.delete(`${baseURL}/appointment/${id}`);
     const filteredAppointments = this.state.appointments.filter(appointment => {
@@ -124,87 +114,16 @@ class Patient extends Component {
   }
 
   render() {
-<<<<<<< HEAD
     const showUpdateAppt = this.state.editButton ? (
       <UpdateAppt
         appointment={this.state.selectedAppointment}
         getAppointments={this.state.getAppointments}
       />
     ) : null;
-
-    return (
-      <div className="container">
-        <h1>Welcome Molly Weasley</h1>
-
-        <h1>My Appointments</h1>
-        <NewAppt getAppointments={this.getAppointments} baseURL={baseURL} />
-        <main>
-          <div>
-            <section>
-              <table className="appointments">
-                <tbody>
-                  {this.state.appointments.map(appointment => {
-                    const date = new Date(appointment.date);
-                    const formatDate = date.toDateString();
-                    return (
-                      <tr
-                        onMouseOver={() => this.getAppointment(appointment)}
-                        key={appointment._id}
-                      >
-                        <td>
-                          <a href={appointment} target="_blank">
-                            {formatDate}
-                          </a>
-                        </td>
-                        <td>{appointment.time}</td>
-                        {/* note: toggle may not be needed as written - TBD */}
-                        <td
-                          className={appointment.visited ? "visited" : null}
-                          onDoubleClick={() =>
-                            this.toggleVisited(appointment, appointment._id)
-                          }
-                        >
-                          {" "}
-                          {appointment.url}
-                        </td>
-                        <td>
-                          <button
-                            onClick={() => this.editAppointments(appointment)}
-                          >
-                            Edit
-                          </button>
-                        </td>
-                        <td>
-                          {" "}
-                          <button
-                            onClick={() =>
-                              this.deleteAppointments(appointment._id)
-                            }
-                          >
-                            Delete{" "}
-                          </button>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </section>
-          </div>
-          <section> {showUpdateAppt} </section>
-        </main>
-        <br />
-        <br />
-        <br />
-        {this.state.appointment && (
-          <ShowAppt appointment={this.state.appointment} />
-        )}
-=======
-    const showUpdateAppt= this.state.editButton ? <UpdateAppt appointment={ this.state.selectedAppointment } getAppointments={ this.state.getAppointments } /> : null;
     return (
       <div className="container">
         <div className="container-sidebar">
-          < Sidebar 
+          <Sidebar
           // firstName = {this.state.firstName}
           // lastName = {this.state.users.lastName}
           />
@@ -220,7 +139,7 @@ class Patient extends Component {
               </div>
             </div>
           </div> */}
-          <h2>Schedule An Appointment</h2>  
+          <h2>Schedule An Appointment</h2>
           <NewAppt getAppointments={this.getAppointments} baseURL={baseURL} />
           <h2>Current Appointments</h2>
           {/* <CurrentAppointments /> */}
@@ -230,7 +149,7 @@ class Patient extends Component {
               <tbody>
                 {this.state.appointments.map(appointment => {
                   const date = new Date(appointment.date);
-                  const formatDate = date.toDateString()
+                  const formatDate = date.toDateString();
                   // return this.state.users.map(user => {
                   //   if (user._id === appointment.patientId) {
                   return (
@@ -240,54 +159,64 @@ class Patient extends Component {
                     //     <th>Time</th>
                     //   </tr>
                     // </thead>
-                    <tr className="bordered" onMouseOver={() => this.getAppointment(appointment)}
-                      key={ appointment._id }>
+                    <tr
+                      className="bordered"
+                      onMouseOver={() => this.getAppointment(appointment)}
+                      key={appointment._id}
+                    >
                       <td>
-                        <a href={ appointment } target="_blank">
-                          { formatDate }
+                        <a href={appointment} target="_blank">
+                          {formatDate}
                         </a>
                       </td>
-                      <td>
-                        { appointment.time }
-                      </td>
+                      <td>{appointment.time}</td>
                       {/* note: toggle may not be needed as written - TBD */}
-                      {/* <td
+                      {
+                        /* <td
                         className={ appointment.visited ? "visited" : null}
                         onDoubleClick={() =>
                           this.toggleVisited(appointment, appointment._id) }>
                         {" "}
                         {appointment.url}
                       </td>*/
-                      <td>
-                        <button onClick={() => this.editAppointments(appointment)}>Edit</button>
-                      </td> }
+                        <td>
+                          <button
+                            onClick={() => this.editAppointments(appointment)}
+                          >
+                            Edit
+                          </button>
+                        </td>
+                      }
                       <td>
                         {" "}
-                        <button onClick={() => this.deleteAppointments(appointment._id)}>
+                        <button
+                          onClick={() =>
+                            this.deleteAppointments(appointment._id)
+                          }
+                        >
                           Delete{" "}
                         </button>
                       </td>
                     </tr>
                   );
-                }
-              )
-                }
+                })}
               </tbody>
             </table>
           </div>
-          <div> { showUpdateAppt } </div>
+          <div> {showUpdateAppt} </div>
           <br />
           <br />
           <br />
-          {this.state.appointment && <ShowAppt appointment={this.state.appointment} />}
+          {this.state.appointment && (
+            <ShowAppt appointment={this.state.appointment} />
+          )}
         </div>
         {/* <div className="container-office-info"> */}
-          <div className="container-officeHours">
-            <OfficeInfo />
-            <Map />
-          </div>
+        <div className="container-officeHours">
+          <OfficeInfo />
+          <Map />
+        </div>
         {/* </div> */}
->>>>>>> cf690827d47c71906ba1cf829b42c2cde2218bbd
       </div>
     );
   }
